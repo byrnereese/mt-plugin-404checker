@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<plugin version="1.0">
+  <name>Elise - A Link Check for MT</name>
+  <version_url>http://www.majordojo.com/projects/LinkChecker/version.xml</version_url>
+  <sig>Elise/Elise.pl</sig>
+  <files>
+    <file>
+      <src>plugins/Elise/Elise.pl</src>
+      <destination>plugins/Elise/Elise.pl</destination>
+    </file>
+    <file>
+      <src>plugins/Elise/lib</src>
+      <destination>plugins/Elise/lib</destination>
+    </file>
+    <file>
+      <src>plugins/Elise/tmpl</src>
+      <destination>plugins/Elise/tmpl</destination>
+    </file>
+  </files>
+  <uninstall>
+    <rmdir>plugins/Elise</rmdir>
+  </uninstall>
+</plugin>

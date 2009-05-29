@@ -1,0 +1,47 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<div id="list-entry">
+
+<script type="text/javascript">
+<!--
+var tableSelect;
+function init()
+{
+	// setup
+	tableSelect = new TC.TableSelect( "selector" );
+	tableSelect.rowSelect = true;
+	setFilterCol(<TMPL_IF NAME=FILTER>'<TMPL_VAR NAME=FILTER>'<TMPL_ELSE>'none'</TMPL_IF>);<TMPL_IF NAME=FILTER>
+	setFilterVal('<TMPL_VAR NAME=FILTER_VAL>');
+</TMPL_IF>
+}
+TC.attachLoadEvent( init );
+// -->
+</script>
+
+<h2><span class="weblog-title-highlight"><TMPL_VAR NAME=BLOG_NAME ESCAPE=HTML>:</span> <MT_TRANS phrase="Link Check Results"></h2>
+
+<p class="page-desc">
+<MT_TRANS phrase="_USAGE_ENTRY_LIST_BLOG" params="<TMPL_VAR NAME=BLOG_NAME ESCAPE=HTML>">
+</p>
+
+<div class="tabs">
+<ul>
+<li class="yah"><a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=link_check<TMPL_IF NAME=BLOG_ID>&amp;blog_id=<TMPL_VAR NAME=BLOG_ID></TMPL_IF>"><MT_TRANS phrase="Links"></a></li>
+</ul>
+</div>
+
+<TMPL_IF NAME=LINK_TABLE>
+
+<div class="list-wrapper">
+<TMPL_INCLUDE NAME=link_table.tmpl>
+</div>
+
+<TMPL_ELSE>
+
+<div class="message"><MT_TRANS phrase="No links were discovered? That's weird. Don't you how to blog?"></div>
+
+</TMPL_IF>
+
+</div>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

@@ -1,0 +1,61 @@
+<form method="post" action="<TMPL_VAR NAME=SCRIPT_URL>" onsubmit="return this['__mode'] ? true : false">
+
+<input type="hidden" name="__mode" value="<TMPL_IF NAME=IS_POWER_EDIT>save_entries</TMPL_IF>" />
+<input type="hidden" name="_type" value="entry" />
+<input type="hidden" name="blog_id" value="<TMPL_VAR NAME=BLOG_ID>" />
+<input type="hidden" name="offset" value="<TMPL_VAR NAME=OFFSET>" />
+<input type="hidden" name="limit" value="<TMPL_VAR NAME=LIMIT>" />
+<input type="hidden" name="filter_args" value="<TMPL_VAR NAME=FILTER_ARGS>" />
+<input type="hidden" name="return_args" value="tab=entry&amp;<TMPL_VAR NAME=RETURN_ARGS ESCAPE=HTML>" />
+<input type="hidden" name="magic_token" value="<TMPL_VAR NAME=MAGIC_TOKEN>" />
+<input type="hidden" name="action_name" value="" />
+<input type="hidden" name="itemset_action_input" value="" />
+
+<div class="list" id="selector">
+<table cellspacing="0" class="compact">
+<thead>
+<tr>
+<th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
+<th id="en-status">
+<img src="<TMPL_VAR NAME=STATIC_URI>images/status_icons/flag.gif" alt="<MT_TRANS phrase="Status">" title="<MT_TRANS phrase="Status">" width="9" height="9" />
+</th>
+<th id="en-title"><MT_TRANS phrase="Post"></th>
+<th id="en-link"><MT_TRANS phrase="Link/URL"></th>
+<th id="en-link">&nbsp;</th>
+<th id="en-view">&nbsp;</th>
+</tr>
+</thead>
+
+<tbody>
+<TMPL_LOOP NAME=OBJECT_LOOP>
+<tr class="<TMPL_IF __ODD__>odd<TMPL_ELSE>even</TMPL_IF>">
+
+<td class="cb">
+<input type="checkbox" name="id" value="<TMPL_VAR NAME=ID>" class="select" />
+</td>
+
+<td class="<TMPL_IF NAME=STATUS_DRAFT>status-draft</TMPL_IF><TMPL_IF NAME=STATUS_PUBLISH>status-publish</TMPL_IF><TMPL_IF NAME=STATUS_FUTURE>status-future</TMPL_IF>">
+<TMPL_IF NAME=STATUS_DRAFT>
+<a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=list_entries<TMPL_IF NAME=BLOG_ID>&amp;blog_id=<TMPL_VAR NAME=BLOG_ID></TMPL_IF>&amp;filter=status&amp;filter_val=1" title="<MT_TRANS phrase="Only show unpublished entries">"><img src="<TMPL_VAR NAME=STATIC_URI>images/spacer.gif" alt="<MT_TRANS phrase="Unpublished">" width="9" height="9" /></a>
+</TMPL_IF>
+<TMPL_IF NAME=STATUS_PUBLISH>
+<a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=list_entries<TMPL_IF NAME=BLOG_ID>&amp;blog_id=<TMPL_VAR NAME=BLOG_ID></TMPL_IF>&amp;filter=status&amp;filter_val=2" title="<MT_TRANS phrase="Only show published entries">"><img src="<TMPL_VAR NAME=STATIC_URI>images/spacer.gif" alt="<MT_TRANS phrase="Published">" width="9" height="9" /></a>
+</TMPL_IF>
+<TMPL_IF NAME=STATUS_FUTURE>
+<a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=list_entries<TMPL_IF NAME=BLOG_ID>&amp;blog_id=<TMPL_VAR NAME=BLOG_ID></TMPL_IF>&amp;filter=status&amp;filter_val=4" title="<MT_TRANS phrase="Only show scheduled entries">"><img src="<TMPL_VAR NAME=STATIC_URI>images/spacer.gif" alt="<MT_TRANS phrase="Scheduled">" width="9" height="9" /></a>
+</TMPL_IF>
+</td>
+
+
+<td><a href=""><TMPL_VAR NAME=TITLE></a></td>
+<td><TMPL_VAR NAME=URI></td>
+<td><TMPL_VAR NAME=LINK_STATUS></td>
+
+</tr>
+</TMPL_LOOP>
+</tbody>
+
+</table>
+</div>
+
+</form>
