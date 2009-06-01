@@ -1,0 +1,18 @@
+name: "Link Checker"
+version: 0.93
+author_name: 'Byrne Reese'
+author_link: 'http://www.majordojo.com/'
+description: 'This plugin helps keep your blog up to date by helping you to keep your outbound links current.'
+plugin_link: 'http://www.majordojo.com/projects/LinkChecker/'
+
+applications:
+  cms:
+    methods:
+      link_check: $LinkChecker::LinkChecker::Plugin::do_check
+
+list_actions:
+  entry:
+    check_links:
+      label: "Validate Links"
+      code: $LinkChecker::LinkChecker::Plugin::itemset_handler
+      order: 100

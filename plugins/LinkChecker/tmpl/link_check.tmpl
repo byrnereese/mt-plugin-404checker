@@ -1,0 +1,65 @@
+<mt:setvarblock name="page_title"><__trans phrase="Link Check Results"></mt:setvarblock>
+<mt:setvarblock name="html_title"><__trans phrase="Link Check Results"></mt:setvarblock>
+
+<mt:setvarblock name="html_body_footer">
+    <mt:include name="include/display_options.tmpl">
+</mt:setvarblock>
+
+<mt:setvarblock name="related_content">
+    <mtapp:PageActions />
+</mt:setvarblock>
+
+<mt:setvarblock name="html_head" append="1">
+    <script type="text/javascript">
+    <!--
+    var tableSelect;
+    function init()
+    {
+    	// setup
+    	tableSelect = new TC.TableSelect( "links-listing-table" );
+    	tableSelect.rowSelect = true;
+    }
+
+    TC.attachLoadEvent( init );
+    //-->
+    </script> 
+    <style type="text/css">
+    <!--
+#links-listing-table tr td.status { background-repeat: no-repeat; background-position: center center; }
+#links-listing-table tr.valid td.status { background-image: url('<mt:StaticWebPath>images/status_icons/success.gif'); }
+#links-listing-table tr.invalid td.status { background-image: url('<mt:StaticWebPath>images/status_icons/warning.gif'); }
+    // -->
+    </style>
+</mt:setvarblock>
+
+<$mt:include name="include/header.tmpl"$>
+
+<mtapp:listing type="links" default="<__trans phrase="Good news: there were no broken links found.">" empty_message="<__trans phrase="No broken links could be found.">">
+    <mt:if name="__first__">
+    <thead>
+        <tr>
+            <th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
+            <th id="l-status"></th>
+            <th id="l-type"><__trans phrase="Type"></th>
+            <th id="l-uri"><__trans phrase="URL"></th>
+            <th id="l-cnt"><__trans phrase="Entry"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    </mt:if>
+        <tr class="<mt:if name="__odd__">odd<mt:else>even</mt:if> <mt:if name="status" eq="1">valid<mt:else>invalid</mt:if>">
+            <td class="cb"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></td>
+            <td class="status">
+              <img src="<$mt:var name="static_uri"$>images/spacer.gif" alt="<__trans phrase="Status">" title="<__trans phrase="Status">" width="9" height="9" />
+            </td>
+            <td><mt:var name="type" escape="html"></td>
+<mt:ignore>            <td><a href="?__mode=fix_link&id=<$mt:var name="entry_id"$>&amp;id=<$mt:var name="ids"$>&amp;blog_id=<$mt:var name="blog_id"$>&url=<$mt:var name="uri" escape="url"$>" class=""><$mt:var name="uri" escape="html"$></a></td></mt:ignore>
+            <td><$mt:var name="uri" escape="html"$></td>
+            <td><mt:var name="title" escape="html"></td>
+        </tr>
+    <mt:if name="__last__">
+    </tbody>
+    </mt:if>
+</mtapp:listing>
+<mt:include name="include/footer.tmpl">
